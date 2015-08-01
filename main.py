@@ -61,7 +61,7 @@ def add(account, ip):
     f.close()
     # log
     f = open(log_file, 'a')
-    template_log = '%s add %s at %s'
+    template_log = '%s add %s at %s\n'
     f.write(template_log % (account, ip, strftime("%m/%d/%Y %H:%M:%S")))
     f.close()
 
