@@ -16,16 +16,20 @@ def scan_and_clean():
     lines = f.readlines()
     f.close()
     lines_to_keep = []
-    ip_to_remove = []
+    ip_to_remove = {}
     for line in lines:
         tokens = line.split()
         ip = tokens[0]
         timestamp = int(tokens[1])
         delta_time = int(time.time()) - timestamp
         if delta_time >= 3600 * 3:
-            ip_to_remove.append(ip)
+            ip_to_remove.add(ip)
         else:
             lines_to_keep.append(line)
+            # if ip in trash box found another not expire record,
+            # do not remove
+            if ip in ip_to_remove:
+                ip_to_remove.remove(ip)
     # write back to watch file
     f = open(watch_file, 'w')
     for line in lines_to_keep:
