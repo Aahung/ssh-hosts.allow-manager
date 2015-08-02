@@ -16,7 +16,7 @@ def scan_and_clean():
     lines = f.readlines()
     f.close()
     lines_to_keep = []
-    ip_to_remove = {}
+    ip_to_remove = set()
     for line in lines:
         tokens = line.split()
         ip = tokens[0]
